@@ -51,7 +51,7 @@ public class Bicycle_System {
     }
     
     public static void main(String[] args) {
-        ManageBicyclePost w = new ManageBicyclePost();
+        Registration w = new Registration();
         w.setVisible(true);
     }
 }

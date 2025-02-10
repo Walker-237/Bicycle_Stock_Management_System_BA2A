@@ -22,9 +22,12 @@ public class stats2023 extends javax.swing.JFrame {
     /**
      * Creates new form stats2022
      */
-    public stats2023() {
+     private static String username;
+
+    public stats2023(String username) {
         initComponents();
          displayChart();
+         this.username = username;
     }
 
     /**
@@ -117,7 +120,7 @@ public class stats2023 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backbtnActionPerformed
-        ViewStatistics w = new ViewStatistics();
+       ViewStatistics w = new ViewStatistics(username);
         this.dispose();
         w.setVisible(true);
     }//GEN-LAST:event_backbtnActionPerformed
@@ -198,7 +201,7 @@ private void displayChart() {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new stats2022().setVisible(true);
+                new stats2022(username).setVisible(true);
             }
         });
     }

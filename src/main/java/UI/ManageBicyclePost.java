@@ -18,6 +18,8 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+
 
 /**
  *
@@ -28,11 +30,13 @@ public class ManageBicyclePost extends javax.swing.JFrame {
     /**
      * Creates new form manageUsers
      */
-    public ManageBicyclePost() {
+    private static String username;
+    
+    public ManageBicyclePost(String username) {
+        this.username = username;
         initComponents();
-        table_update();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -551,7 +555,7 @@ public class ManageBicyclePost extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable3MouseClicked
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-        Admin_Dashboard w = new Admin_Dashboard();
+        StaffDashboard w = new StaffDashboard(username);
         this.dispose();
         w.setVisible(true);
     }//GEN-LAST:event_backBtnActionPerformed
@@ -597,7 +601,7 @@ public class ManageBicyclePost extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ManageBicyclePost().setVisible(true);
+                new ManageBicyclePost(username).setVisible(true);
             }
         });
     }

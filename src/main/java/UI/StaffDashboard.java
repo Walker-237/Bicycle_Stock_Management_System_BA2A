@@ -120,7 +120,8 @@ public class StaffDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_viewStatsBtnActionPerformed
 
     private void ManageBicycleBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageBicycleBtnActionPerformed
-        // TODO add your handling code here:
+         new ManageBicyclePost(username).setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_ManageBicycleBtnActionPerformed
 
     /**
