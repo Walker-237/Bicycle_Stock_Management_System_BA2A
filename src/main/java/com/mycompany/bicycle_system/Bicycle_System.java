@@ -3,7 +3,7 @@
  */
 
 package com.mycompany.bicycle_system;
-import UI.CustomerInterface;
+import UI.*;
 
 /**
  *
@@ -53,7 +53,7 @@ public class Bicycle_System {
     }
     
     public static void main(String[] args) {
-        CustomerInterface w = new CustomerInterface("Melissa");
+        Homepage w = new Homepage();
         w.setVisible(true);
     }
 }

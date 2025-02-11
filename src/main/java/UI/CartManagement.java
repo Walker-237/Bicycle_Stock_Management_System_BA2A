@@ -4,6 +4,7 @@
  */
 package UI;
 
+import UI.userManagement.*;
 import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

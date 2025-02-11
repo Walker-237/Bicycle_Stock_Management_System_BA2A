@@ -5,6 +5,7 @@
 package UI;
 
 
+import UI.userManagement.StaffDashboard;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -179,7 +180,7 @@ public class ManageBicyclePost extends javax.swing.JFrame {
         jLabel4.setText("Description");
 
         AddBtn.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        AddBtn.setForeground(new java.awt.Color(0, 153, 51));
+        AddBtn.setForeground(new java.awt.Color(0, 204, 255));
         AddBtn.setText("Add");
         AddBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -188,7 +189,7 @@ public class ManageBicyclePost extends javax.swing.JFrame {
         });
 
         UpdateBtn.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        UpdateBtn.setForeground(new java.awt.Color(0, 153, 51));
+        UpdateBtn.setForeground(new java.awt.Color(255, 204, 51));
         UpdateBtn.setText("Update");
         UpdateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -197,7 +198,7 @@ public class ManageBicyclePost extends javax.swing.JFrame {
         });
 
         DeleteBtn.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        DeleteBtn.setForeground(new java.awt.Color(0, 153, 51));
+        DeleteBtn.setForeground(new java.awt.Color(255, 51, 51));
         DeleteBtn.setText("Delete");
         DeleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

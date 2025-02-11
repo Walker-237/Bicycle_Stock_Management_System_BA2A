@@ -3,6 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package UI;
+
+import UI.userManagement.*;
+import UI.Homepage;
+import UI.ManagStaffAccount;
+import UI.FunctionalityManagement.AccountManagement.ManageCustomerAccounts;
+
 /**
  *
  * @author Walker
@@ -32,6 +38,7 @@ public class Admin_Dashboard extends javax.swing.JFrame {
         manageStaffAccountBtn = new javax.swing.JButton();
         manageCustomerAccountBtn = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        logOutBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -92,6 +99,15 @@ public class Admin_Dashboard extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(0, 153, 51));
         jLabel3.setText("Functionalities");
 
+        logOutBtn.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        logOutBtn.setForeground(new java.awt.Color(255, 153, 51));
+        logOutBtn.setText("Log Out");
+        logOutBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logOutBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -104,7 +120,9 @@ public class Admin_Dashboard extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(145, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(logOutBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(109, 109, 109))
         );
         jPanel2Layout.setVerticalGroup(
@@ -116,7 +134,9 @@ public class Admin_Dashboard extends javax.swing.JFrame {
                 .addComponent(manageCustomerAccountBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52)
                 .addComponent(manageStaffAccountBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(logOutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -149,6 +169,11 @@ public class Admin_Dashboard extends javax.swing.JFrame {
          w.setVisible(true);
     }//GEN-LAST:event_manageCustomerAccountBtnActionPerformed
 
+    private void logOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutBtnActionPerformed
+        new Homepage().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_logOutBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -175,6 +200,7 @@ public class Admin_Dashboard extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Admin_Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -190,6 +216,7 @@ public class Admin_Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton logOutBtn;
     private javax.swing.JButton manageCustomerAccountBtn;
     private javax.swing.JButton manageStaffAccountBtn;
     // End of variables declaration//GEN-END:variables
