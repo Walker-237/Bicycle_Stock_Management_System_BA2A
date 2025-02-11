@@ -5,6 +5,7 @@ com\mycompany\bicycle_system\Bicycle_System$Admin.class
 UI\AuthenticationManagement\Login$4.class
 UI\FunctionalityManagement\PostManagement$7.class
 UI\userManagement\CustomerInterface$3.class
+UI\FunctionalityManagement\PostManagement$12.class
 UI\FunctionalityManagement\StatisticsManagement\stats2023$2.class
 UI\AuthenticationManagement\Registration$2.class
 UI\FunctionalityManagement\StatisticsManagement\ViewStatistics$5.class

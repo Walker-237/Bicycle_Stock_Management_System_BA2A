@@ -41,33 +41,48 @@ public class Catalogue extends javax.swing.JFrame {
         this.username = username;
     }
 
-    private void loadBicycles() {
-    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-    model.setRowCount(0); // Clear existing rows
+     private void loadBicycles() {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0); // Clear existing rows
 
-    String url = "jdbc:mysql://localhost:3306/bicycle_system";
-    String user = "root";
-    String password = "";
+        String url = "jdbc:mysql://localhost:3306/bicycle_system";
+        String user = "root";
+        String password = "";
 
-    try (Connection con = DriverManager.getConnection(url, user, password);
-         PreparedStatement stmt = con.prepareStatement("SELECT name, description, price, size, type FROM Bicycle");
-         ResultSet rs = stmt.executeQuery()) {
+        boolean hasAvailableBicycles = false; // Track if at least one bicycle is available
 
-        while (rs.next()) {
-            String name = rs.getString("name");
-            String description = rs.getString("description");
-            String price = rs.getString("price");
-            String size = rs.getString("size"); // Fetching size
-            String type = rs.getString("type");
+        try (Connection con = DriverManager.getConnection(url, user, password);
+             PreparedStatement stmt = con.prepareStatement("SELECT name, description, price, size, type, noavailable FROM Bicycle");
+             ResultSet rs = stmt.executeQuery()) {
 
-            // Add row with size included
-            model.addRow(new Object[]{name, description, price, size, type});
+            while (rs.next()) {
+                String name = rs.getString("name");
+                String description = rs.getString("description");
+                String price = rs.getString("price");
+                String size = rs.getString("size");
+                String type = rs.getString("type");         
+                int qty = rs.getInt("noavailable");
+
+                // Check if at least one bicycle is available
+                if (qty > 0) {
+                    hasAvailableBicycles = true;
+                }
+
+                // Add row with size included
+                model.addRow(new Object[]{name, description, price, size, type, qty});
+            }
+
+            // If no bicycles are available, show an alert
+            if (!hasAvailableBicycles) {
+                JOptionPane.showMessageDialog(this, "No bicycles are available in stock!", "Out of Stock", JOptionPane.WARNING_MESSAGE);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error loading bicycles: " + e.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Error loading bicycles: " + e.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
     }
-}
+
 
     
      private void setupTableClickListener() {
@@ -79,7 +94,14 @@ public class Catalogue extends javax.swing.JFrame {
                     String name = jTable1.getValueAt(row, 0).toString();
                     String description = jTable1.getValueAt(row, 1).toString();
                     String price = jTable1.getValueAt(row, 2).toString();
-                    String type = jTable1.getValueAt(row, 3).toString();
+                    String type = jTable1.getValueAt(row, 3).toString();             
+                    int qty = Integer.parseInt(jTable1.getValueAt(row, 5).toString());
+
+                    // Prevent adding to cart if quantity is 0
+                    if (qty == 0) {
+                        JOptionPane.showMessageDialog(Catalogue.this, "Sorry, " + name + " is out of stock!", "Out of Stock", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
 
                     int response = JOptionPane.showConfirmDialog(
                             Catalogue.this,
@@ -180,17 +202,17 @@ public class Catalogue extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Name", "Description", "Price", "Size", "Type"
+                "Name", "Description", "Price", "Size", "Type", "Quantity"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
 
             public Class getColumnClass(int columnIndex) {

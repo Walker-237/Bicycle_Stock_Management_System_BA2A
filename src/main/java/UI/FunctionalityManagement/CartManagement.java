@@ -98,52 +98,94 @@ public class CartManagement extends javax.swing.JFrame {
         }
     });
 }
-    
+   
     private void processPayment() {
+        String url = "jdbc:mysql://localhost:3306/bicycle_system";
+        String user = "root";
+        String password = "";
+
+        try (Connection con = DriverManager.getConnection(url, user, password)) {
+            // Get the User_ID based on the username
+            String getUserQuery = "SELECT id FROM users WHERE name = ? LIMIT 1";
+            int userId = -1;
+
+            try (PreparedStatement userStmt = con.prepareStatement(getUserQuery)) {
+                userStmt.setString(1, username);
+                ResultSet userRs = userStmt.executeQuery();
+
+                if (userRs.next()) {
+                    userId = userRs.getInt("id"); // Fetch User_ID
+                } else {
+                    JOptionPane.showMessageDialog(this, "User not found!", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+
+            // Insert new order into orders table with current date
+            String insertOrderQuery = "INSERT INTO orders (User_Id, totalAmount, Date) " +
+                                      "SELECT ?, SUM(Product_Price), CURDATE() FROM cart WHERE User_ID = ?";
+
+            try (PreparedStatement insertStmt = con.prepareStatement(insertOrderQuery)) {
+                insertStmt.setInt(1, userId);
+                insertStmt.setInt(2, userId);
+                int rowsInserted = insertStmt.executeUpdate();
+
+                if (rowsInserted > 0) {
+                    updateBicycleStock(userId); // Decrement stock before clearing the cart
+                    JOptionPane.showMessageDialog(this, "Payment successful! Your order has been placed.", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    clearCart(userId);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Payment failed! Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+   
+    private void updateBicycleStock(int userId) {
+        String url = "jdbc:mysql://localhost:3306/bicycle_system";
+        String user = "root";
+        String password = "";
+
+        try (Connection con = DriverManager.getConnection(url, user, password)) {
+            // Decrement the number of available bicycles for each item in the cart
+            String updateStockQuery = "UPDATE Bicycle b JOIN cart c ON b.id = c.Product_id " +
+                                      "SET b.noavailable = b.noavailable - 1 " +
+                                      "WHERE c.User_ID = ? AND b.noavailable > 0";
+
+            try (PreparedStatement stmt = con.prepareStatement(updateStockQuery)) {
+                stmt.setInt(1, userId);
+                stmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error updating bicycle stock: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private boolean isCartEmpty(int userId) {
     String url = "jdbc:mysql://localhost:3306/bicycle_system";
     String user = "root";
     String password = "";
 
-    try (Connection con = DriverManager.getConnection(url, user, password)) {
-        // Get the User_ID based on the username
-        String getUserQuery = "SELECT id FROM users WHERE name = ? LIMIT 1";
-        int userId = -1;
-
-        try (PreparedStatement userStmt = con.prepareStatement(getUserQuery)) {
-            userStmt.setString(1, username);
-            ResultSet userRs = userStmt.executeQuery();
-
-            if (userRs.next()) {
-                userId = userRs.getInt("id"); // Fetch User_ID
-            } else {
-                JOptionPane.showMessageDialog(this, "User not found!", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
+    try (Connection con = DriverManager.getConnection(url, user, password);
+         PreparedStatement stmt = con.prepareStatement("SELECT COUNT(*) FROM cart WHERE User_ID = ?")) {
+        
+        stmt.setInt(1, userId);
+        ResultSet rs = stmt.executeQuery();
+        
+        if (rs.next()) {
+            return rs.getInt(1) == 0; // Returns true if cart is empty
         }
-
-        // Insert new order into orders table with current date
-        String insertOrderQuery = "INSERT INTO orders (User_Id, totalAmount, Date) " +
-                                  "SELECT ?, SUM(Product_Price), CURDATE() FROM cart WHERE User_ID = ?";
-
-        try (PreparedStatement insertStmt = con.prepareStatement(insertOrderQuery)) {
-            insertStmt.setInt(1, userId);
-            insertStmt.setInt(2, userId);
-            int rowsInserted = insertStmt.executeUpdate();
-
-            if (rowsInserted > 0) {
-                JOptionPane.showMessageDialog(this, "Payment successful! Your order has been placed.", "Success", JOptionPane.INFORMATION_MESSAGE);
-
-                // Clear the cart after successful order placement
-                clearCart(userId);
-            } else {
-                JOptionPane.showMessageDialog(this, "Payment failed! Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-
     } catch (SQLException e) {
         e.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Error checking cart: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
+    
+    return true; // Default to true if error occurs
 }
 
      private void clearCart(int userId) {
@@ -310,31 +352,53 @@ public class CartManagement extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void makepaymentbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makepaymentbtnActionPerformed
-        int response = JOptionPane.showConfirmDialog(
-        this,
-        "Do you want to proceed with the transaction?",
-        "Confirm Payment",
-        JOptionPane.YES_NO_OPTION,
-        JOptionPane.QUESTION_MESSAGE
-    );
+        String url = "jdbc:mysql://localhost:3306/bicycle_system";
+    String user = "root";
+    String password = "";
 
-    if (response == JOptionPane.YES_OPTION) {
-        processPayment();
+    try (Connection con = DriverManager.getConnection(url, user, password)) {
+        // Get the User_ID based on the username
+        String getUserQuery = "SELECT id FROM users WHERE name = ? LIMIT 1";
+        int userId = -1;
+
+        try (PreparedStatement userStmt = con.prepareStatement(getUserQuery)) {
+            userStmt.setString(1, username);
+            ResultSet userRs = userStmt.executeQuery();
+
+            if (userRs.next()) {
+                userId = userRs.getInt("id"); // Fetch User_ID
+            } else {
+                JOptionPane.showMessageDialog(this, "User not found!", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+
+        // **Check if the cart is empty before proceeding with payment**
+        if (isCartEmpty(userId)) {
+            JOptionPane.showMessageDialog(this, "Your cart is empty! Please add items before making a payment.", "Empty Cart", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Proceed with payment if the cart is not empty
+        int response = JOptionPane.showConfirmDialog(
+            this, 
+            "Do you want to proceed with the transaction?", 
+            "Confirm Payment", 
+            JOptionPane.YES_NO_OPTION, 
+            JOptionPane.QUESTION_MESSAGE
+        );
+
+        if (response == JOptionPane.YES_OPTION) {
+            processPayment();
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
     }//GEN-LAST:event_makepaymentbtnActionPerformed
 
     private void RemovebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemovebtnActionPerformed
-       int response = JOptionPane.showConfirmDialog(
-        this,
-        "Do you want to proceed with the transaction?",
-        "Confirm Payment",
-        JOptionPane.YES_NO_OPTION,
-        JOptionPane.QUESTION_MESSAGE
-    );
-
-    if (response == JOptionPane.YES_OPTION) {
-        processPayment(); // Calls the payment processing method
-    }
+       removeFromCart();
     }//GEN-LAST:event_RemovebtnActionPerformed
 
     private void backbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backbtnActionPerformed
