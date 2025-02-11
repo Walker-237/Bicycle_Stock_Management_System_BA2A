@@ -3,13 +3,15 @@
  */
 
 package com.mycompany.bicycle_system;
-import UI.*;
+import UI.CustomerInterface;
 
 /**
  *
  * @author Walker
  */
 public class Bicycle_System {
+    
+    
     class User{
         public int id;      
         public String name,email,password,status;
@@ -51,7 +53,7 @@ public class Bicycle_System {
     }
     
     public static void main(String[] args) {
-        Registration w = new Registration();
+        CustomerInterface w = new CustomerInterface("Melissa");
         w.setVisible(true);
     }
 }
