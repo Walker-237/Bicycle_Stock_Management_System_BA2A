@@ -35,6 +35,7 @@ public class PostManagement extends javax.swing.JFrame {
     public PostManagement(String username) {
         this.username = username;
         initComponents();
+        table_update();
     }
     
     /**

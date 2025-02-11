@@ -1,12 +1,10 @@
-C:\Users\Walker\Documents\NetBeansProjects\Bicycle_System\src\main\java\UI\Admin_Dashboard.java
-C:\Users\Walker\Documents\NetBeansProjects\Bicycle_System\src\main\java\UI\CartManagement.java
+C:\Users\Walker\Documents\NetBeansProjects\Bicycle_System\src\main\java\UI\FunctionalityManagement\CartManagement.java
 C:\Users\Walker\Documents\NetBeansProjects\Bicycle_System\src\main\java\UI\FunctionalityManagement\StatisticsManagement\stats2023.java
 C:\Users\Walker\Documents\NetBeansProjects\Bicycle_System\src\main\java\UI\FunctionalityManagement\StatisticsManagement\stats20221.java
-C:\Users\Walker\Documents\NetBeansProjects\Bicycle_System\src\main\java\UI\ManagStaffAccount.java
+C:\Users\Walker\Documents\NetBeansProjects\Bicycle_System\src\main\java\UI\FunctionalityManagement\AccountManagement\ManagStaffAccount.java
 C:\Users\Walker\Documents\NetBeansProjects\Bicycle_System\src\main\java\UI\AuthenticationManagement\Registration.java
 C:\Users\Walker\Documents\NetBeansProjects\Bicycle_System\src\main\java\UI\userManagement\Admin_Dashboard.java
 C:\Users\Walker\Documents\NetBeansProjects\Bicycle_System\src\main\java\UI\userManagement\CustomerInterface.java
-C:\Users\Walker\Documents\NetBeansProjects\Bicycle_System\src\main\java\UI\ManageBicyclePost.java
 C:\Users\Walker\Documents\NetBeansProjects\Bicycle_System\src\main\java\UI\FunctionalityManagement\StatisticsManagement\stats2025.java
 C:\Users\Walker\Documents\NetBeansProjects\Bicycle_System\src\main\java\UI\FunctionalityManagement\AccountManagement\ManageCustomerAccounts.java
 C:\Users\Walker\Documents\NetBeansProjects\Bicycle_System\src\main\java\UI\AuthenticationManagement\Login.java
@@ -14,6 +12,7 @@ C:\Users\Walker\Documents\NetBeansProjects\Bicycle_System\src\main\java\UI\Funct
 C:\Users\Walker\Documents\NetBeansProjects\Bicycle_System\src\main\java\UI\FunctionalityManagement\StatisticsManagement\ViewStatistics.java
 C:\Users\Walker\Documents\NetBeansProjects\Bicycle_System\src\main\java\UI\userManagement\StaffDashboard.java
 C:\Users\Walker\Documents\NetBeansProjects\Bicycle_System\src\main\java\com\mycompany\bicycle_system\Bicycle_System.java
-C:\Users\Walker\Documents\NetBeansProjects\Bicycle_System\src\main\java\UI\Catalogue.java
 C:\Users\Walker\Documents\NetBeansProjects\Bicycle_System\src\main\java\UI\FunctionalityManagement\StatisticsManagement\stats2024.java
+C:\Users\Walker\Documents\NetBeansProjects\Bicycle_System\src\main\java\UI\FunctionalityManagement\Catalogue.java
+C:\Users\Walker\Documents\NetBeansProjects\Bicycle_System\src\main\java\UI\FunctionalityManagement\PostManagement.java
 C:\Users\Walker\Documents\NetBeansProjects\Bicycle_System\src\main\java\UI\Homepage.java
