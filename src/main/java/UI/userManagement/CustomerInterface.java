@@ -4,6 +4,8 @@
  */
 package UI.userManagement;
 
+import UI.FunctionalityManagement.Catalogue;
+import UI.FunctionalityManagement.CartManagement;
 import UI.FunctionalityManagement.History;
 import UI.*;
 

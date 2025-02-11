@@ -5,7 +5,7 @@
 package UI.userManagement;
 
 import UI.Homepage;
-import UI.ManageBicyclePost;
+import UI.FunctionalityManagement.PostManagement;
 import UI.FunctionalityManagement.StatisticsManagement.ViewStatistics;
 
 /**
@@ -140,7 +140,7 @@ public class StaffDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_viewStatsBtnActionPerformed
 
     private void ManageBicycleBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageBicycleBtnActionPerformed
-        new ManageBicyclePost(username).setVisible(true);
+        new PostManagement(username).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_ManageBicycleBtnActionPerformed
 

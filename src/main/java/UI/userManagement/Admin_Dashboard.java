@@ -5,7 +5,7 @@
 package UI.userManagement;
 
 import UI.Homepage;
-import UI.ManagStaffAccount;
+import UI.FunctionalityManagement.AccountManagement.ManagStaffAccount;
 import UI.FunctionalityManagement.AccountManagement.ManageCustomerAccounts;
 
 /**

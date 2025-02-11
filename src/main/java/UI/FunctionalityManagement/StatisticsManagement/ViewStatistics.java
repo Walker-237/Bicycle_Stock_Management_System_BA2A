@@ -4,11 +4,8 @@
  */
 package UI.FunctionalityManagement.StatisticsManagement;
 
-import UI.stats2022;
-import UI.stats2023;
-import UI.stats2024;
-import UI.stats2025;
 import UI.userManagement.StaffDashboard;
+import UI.FunctionalityManagement.StatisticsManagement.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -207,7 +204,7 @@ public class ViewStatistics extends javax.swing.JFrame {
     }//GEN-LAST:event_btn2023ActionPerformed
 
     private void btn2022ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2022ActionPerformed
-        stats2022 w = new stats2022(username);
+        stats20221 w = new stats20221(username);
         this.dispose();
         w.setVisible(true);
     }//GEN-LAST:event_btn2022ActionPerformed
